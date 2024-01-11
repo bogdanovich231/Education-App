@@ -1,9 +1,9 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Colors from '../Shared/Colors';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function Login() {
+export default function Home() {
     return (
         <View>
             <Image source={require('../Assets/Images/login.png')} />
@@ -13,10 +13,10 @@ export default function Login() {
                     <Text style={styles.buttons}>Sign In</Text>
                     <Text style={styles.buttons}>Sign Up</Text>
                 </View>
-                <View style={styles.containerButtonGoogle}>
+                <TouchableOpacity style={styles.containerButtonGoogle} onPress={() => prompAsync()}>
                     <AntDesign name="google" size={24} color="white" />
                     <Text style={styles.buttonGoogle}>Sign in with Google</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     )
