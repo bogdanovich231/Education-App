@@ -24,7 +24,7 @@ export default function Reset() {
                         onChangeText={(value) => setEmail(value)}
                     />
                 </View>
-                <TouchableOpacity style={styles.ResetBtn} onPress={() => sendPasswordResetEmail(email)}>
+                <TouchableOpacity style={styles.ResetBtn} onPress={() => sendPasswordResetEmail(auth, email)}>
                     <Text style={styles.ResetText}>Sent password reset email</Text>
                 </TouchableOpacity>
             </View>
