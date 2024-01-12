@@ -1,28 +1,33 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import React from 'react'
 import Colors from '../Shared/Colors';
 import { AntDesign } from '@expo/vector-icons';
+import { signInWithGoogle } from '../Shared/firebase';
 
-export default function Home() {
+export default function Home({ navigation }) {
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />
             <View style={styles.containerTitle}>
                 <Text style={styles.title}>Welcome to Courses Application!</Text>
                 <View style={styles.containerButtons}>
-                    <Text style={styles.buttons}>Sign In</Text>
-                    <Text style={styles.buttons}>Sign Up</Text>
+                    <Text style={styles.buttons} onPress={() => navigation.navigate('SignIn')}>Sign In</Text>
+                    <Text style={styles.buttons} onPress={() => navigation.navigate('SignUp')}>Sign Up</Text>
                 </View>
-                <TouchableOpacity style={styles.containerButtonGoogle} onPress={() => prompAsync()}>
+                <TouchableOpacity style={styles.containerButtonGoogle} onPress={signInWithGoogle} >
                     <AntDesign name="google" size={24} color="white" />
-                    <Text style={styles.buttonGoogle}>Sign in with Google</Text>
+                    <Text style={styles.buttonGoogle} >Sign in with Google</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </View >
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        backgroundColor: Colors.white
+    },
     buttonGoogle: {
         fontSize: 25,
         color: Colors.white,

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Colors from '../Shared/Colors';
 import { auth } from '../Shared/firebase';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,7 +17,7 @@ export default function SignIn() {
         }
     }
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />
             <View style={styles.containerLogin}>
                 <Text style={styles.title}>Sign Up</Text>
@@ -39,15 +39,15 @@ export default function SignIn() {
                     />
                 </View>
                 <TouchableOpacity>
-                    <Text style={styles.forgotButton}>Forgot Password?</Text>
+                    <Text style={styles.forgotButton} onPress={() => navigation.navigate('Reset')}>Forgot Password?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.SignUpBtn} onPress={handleSubmit}>
                     <Text style={styles.SignUpText}>Sign Up</Text>
                 </TouchableOpacity>
                 <View style={styles.containerSignUp}>
-                    <Text style={styles.askSignUp}>Registered</Text>
+                    <Text style={styles.askSignUp}>Don't have an account?</Text>
                     <TouchableOpacity style={styles.SignInBtn} onPress={handleSubmit}>
-                        <Text style={styles.SignUpBtnText}>Sign up</Text>
+                        <Text style={styles.SignUpBtnText} onPress={() => navigation.navigate('SignUp')}>Sign up</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -56,6 +56,10 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        backgroundColor: Colors.white
+    },
     SignUpBtnText: {
         fontSize: 20,
         color: Colors.primary,

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Colors from '../Shared/Colors';
 import { registerWithEmailAndPassword } from '../Shared/firebase';
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -18,7 +18,7 @@ export default function SignUp() {
         }
     }
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />
             <View style={styles.containerLogin}>
                 <Text style={styles.title}>Sign Up</Text>
@@ -54,7 +54,7 @@ export default function SignUp() {
                 <View style={styles.containerSignIn}>
                     <Text style={styles.askSignIn}>Already have an account?</Text>
                     <TouchableOpacity style={styles.SignUpBtn} onPress={handleSubmit}>
-                        <Text style={styles.SignInBtnText}>Sign In</Text>
+                        <Text style={styles.SignInBtnText} onPress={() => navigation.navigate('SignIn')}>Sign In</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -63,6 +63,11 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
+
+    container: {
+        height: '100%',
+        backgroundColor: Colors.white
+    },
     SignInBtnText: {
         fontSize: 20,
         color: Colors.primary,

@@ -16,7 +16,7 @@ import {
     where,
     addDoc,
 } from "firebase/firestore";
-  
+
 const firebaseConfig = {
     apiKey: 'AIzaSyCdsPSj9QDNmk3nBf22syd8rWTyhSt7CU0',
     authDomain: 'movie-dc61b.firebaseapp.com',
