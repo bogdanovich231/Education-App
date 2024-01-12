@@ -20,7 +20,7 @@ export default function SignIn({ navigation }) {
         <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />
             <View style={styles.containerLogin}>
-                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.title}>Sign In</Text>
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
@@ -42,7 +42,7 @@ export default function SignIn({ navigation }) {
                     <Text style={styles.forgotButton} onPress={() => navigation.navigate('Reset')}>Forgot Password?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.SignUpBtn} onPress={handleSubmit}>
-                    <Text style={styles.SignUpText}>Sign Up</Text>
+                    <Text style={styles.SignInText}>Sign In</Text>
                 </TouchableOpacity>
                 <View style={styles.containerSignUp}>
                     <Text style={styles.askSignUp}>Don't have an account?</Text>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center'
     },
-    SignUpText: {
+    SignInText: {
         fontSize: 20,
         color: Colors.white
     },
