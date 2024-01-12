@@ -1,22 +1,29 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Colors from '../Shared/Colors';
-import { registerWithEmailAndPassword } from '../Shared/firebase';
+import { auth, registerWithEmailAndPassword } from '../Shared/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function SignUp({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [user, loading] = useAuthState(auth);
 
     const handleSubmit = async () => {
         if (email && password) {
             try {
                 await registerWithEmailAndPassword(name, email, password)
+                alert("success")
             } catch (err) {
                 console.log('Error: ', err.message);
             }
         }
     }
+
+    useEffect(() => {
+        if (user) navigation.navigate("Home");
+    }, [user, navigation.navigate])
     return (
         <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />
