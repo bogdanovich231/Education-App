@@ -8,6 +8,7 @@ export default function SignIn({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [user, loading] = useAuthState(auth);
+
     const handleSubmit = async () => {
         try {
             await logInWithEmailAndPassword(email, password)
@@ -16,9 +17,11 @@ export default function SignIn({ navigation }) {
             console.log('Error: ', err.message);
         }
     }
+
     useEffect(() => {
         if (user) navigation.navigate('Home');
     }, [user, navigation.navigate])
+
     return (
         <View style={styles.container}>
             <Image source={require('../Assets/Images/login.png')} />

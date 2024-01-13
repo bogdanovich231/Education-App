@@ -11,28 +11,26 @@ import { auth } from './App/Shared/firebase';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const { user } = useAuthState(auth);
-  if (user) {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  } else {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen name="Welcome" options={{ headerShown: false }} component={Welcome} />
-          <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignIn} />
-          <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUp} />
-          <Stack.Screen name="Reset" options={{ headerShown: false }} component={Reset} />
-          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
 
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome">
+        {user ? (
+          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+        ) : (
+          <>
+            <Stack.Screen name="Welcome" options={{ headerShown: false }} component={Welcome} />
+            <Stack.Screen name="SignIn" options={{ headerShown: false }} component={SignIn} />
+            <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUp} />
+            <Stack.Screen name="Reset" options={{ headerShown: false }} component={Reset} />
+            <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer >
+  );
 }
+
+
 
 
