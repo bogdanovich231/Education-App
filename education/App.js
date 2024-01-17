@@ -7,6 +7,8 @@ import Welcome from './App/Pages/Welcome';
 import Home from './App/Pages/Home';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from './App/Shared/firebase';
+import DetailsCourse from './App/Pages/DetailsCourse';
+import TopicDetails from './App/Pages/TopicDetails';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -16,7 +18,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
         {user ? (
-          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+          <>
+            <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+            <Stack.Screen name="Details-Course" options={{ headerShown: false }} component={DetailsCourse} />
+          </>
         ) : (
           <>
             <Stack.Screen name="Welcome" options={{ headerShown: false }} component={Welcome} />
@@ -24,6 +29,9 @@ export default function App() {
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUp} />
             <Stack.Screen name="Reset" options={{ headerShown: false }} component={Reset} />
             <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+            <Stack.Screen name="Details-Course" options={{ headerShown: false }} component={DetailsCourse} />
+            <Stack.Screen name="Details-Topic" options={{ headerShown: false }} component={TopicDetails} />
+
           </>
         )}
       </Stack.Navigator>

@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 // import YoutubePlayer from 'react-native-youtube-iframe';
 import Carousel from 'react-native-snap-carousel';
 import Api from '../../Shared/Api';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.55);
@@ -10,7 +12,7 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.55);
 export default function VideoCourses() {
     const [, setPlaying] = useState(false);
     const [video, setVideo] = useState([]);
-
+    const navigation = useNavigation();
     useEffect(() => {
         getSlider();
     }, [])
@@ -19,10 +21,15 @@ export default function VideoCourses() {
         const result = (await Api.getVideo()).data;
         const data = result.data.map((item) => ({
             id: item.id,
+            name: item.attributes.name,
             videoid: item.attributes.VideoId,
             image: item.attributes.image.data[0].attributes.url,
+            banner: item.attributes.Banner.data[0].attributes.url,
+            description: item.attributes.description,
+            informationcourse: item.attributes.informationcourse,
         }))
         setVideo(data);
+        console.log("data", data)
     }
 
     // const onStateChange = useCallback((state) => {
@@ -31,12 +38,15 @@ export default function VideoCourses() {
     //         Alert.alert("video has finished playing!");
     //     }
     // }, []);
-
+    const handleCourse = (course) => {
+        console.log(course)
+        navigation.navigate("Details-Course", { courseData: course });
+    }
     const _renderItem = ({ item }) => {
-        return <View style={styles.itemContainer}>
+        return <TouchableOpacity onPress={() => handleCourse(item)} style={styles.itemContainer}>
             {/* <YoutubePlayer width={225} height={115} videoId={item.videoid} onChangeState={onStateChange} /> */}
             <Image source={{ uri: item.image }} style={{ width: 230, height: 125, borderRadius: 10 }} />
-        </View>
+        </TouchableOpacity>
     };
 
     return (
