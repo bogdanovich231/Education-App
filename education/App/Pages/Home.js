@@ -1,18 +1,22 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Header from '../Assets/Components/Header'
 import SearchBar from '../Assets/Components/SearchBar'
 import Banner from '../Assets/Components/Banner'
 import VideoCourses from '../Assets/Components/VideoCourses'
+import Course from '../Assets/Components/Course'
 
 export default function Home() {
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Header />
             <SearchBar />
             <Banner />
             <VideoCourses />
-        </View>
+            <Course type={'basic'} />
+            <Course type={'advance'} />
+        </ScrollView>
     )
 }
 

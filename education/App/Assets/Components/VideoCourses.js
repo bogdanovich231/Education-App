@@ -1,36 +1,49 @@
-import { View, Text, Button, Dimensions, StyleSheet } from 'react-native';
-import React, { useCallback, useState } from 'react';
-import YoutubePlayer from 'react-native-youtube-iframe';
+import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+// import YoutubePlayer from 'react-native-youtube-iframe';
 import Carousel from 'react-native-snap-carousel';
+import Api from '../../Shared/Api';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.55);
 
 export default function VideoCourses() {
     const [, setPlaying] = useState(false);
+    const [video, setVideo] = useState([]);
 
-    const onStateChange = useCallback((state) => {
-        if (state === "ended") {
-            setPlaying(false);
-            Alert.alert("video has finished playing!");
-        }
-    }, []);
-    const data = [
-        { id: 1, video: "ZbX4Ok9YX94", name: "react" },
-        { id: 1, video: "EGW2HS2tqAQ", name: "next" },
-        { id: 1, video: "yXSdYD_JHN4", name: "react_native" },
-        { id: 1, video: "JaIA1k4FLG8", name: "vue" },
-        { id: 1, video: "Zs-W12TpAeM", name: "react_native" },
-    ];
-    const _renderItem = ({ item, index }) => {
-        return <View style={styles.itemContainer}><YoutubePlayer height={300} width={300} videoId={item.video} onChangeState={onStateChange} /></View>
+    useEffect(() => {
+        getSlider();
+    }, [])
+
+    const getSlider = async () => {
+        const result = (await Api.getVideo()).data;
+        const data = result.data.map((item) => ({
+            id: item.id,
+            videoid: item.attributes.VideoId,
+            image: item.attributes.image.data[0].attributes.url,
+        }))
+        setVideo(data);
+    }
+
+    // const onStateChange = useCallback((state) => {
+    //     if (state === "ended") {
+    //         setPlaying(false);
+    //         Alert.alert("video has finished playing!");
+    //     }
+    // }, []);
+
+    const _renderItem = ({ item }) => {
+        return <View style={styles.itemContainer}>
+            {/* <YoutubePlayer width={225} height={115} videoId={item.videoid} onChangeState={onStateChange} /> */}
+            <Image source={{ uri: item.image }} style={{ width: 230, height: 125, borderRadius: 10 }} />
+        </View>
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.TextTitle}>Video Course</Text>
             <Carousel
-                data={data}
+                data={video}
                 renderItem={_renderItem}
                 sliderWidth={SLIDER_WIDTH}
                 itemWidth={ITEM_WIDTH}
@@ -45,17 +58,17 @@ export default function VideoCourses() {
 const styles = StyleSheet.create({
     container: {
         marginTop: 26,
-        marginLeft: 20
+        marginLeft: 20,
     },
     TextTitle: {
         fontSize: 20,
         fontWeight: 'bold'
     },
     carouselContainer: {
-        marginTop: 15
+        marginTop: 15,
     },
     itemContainer: {
         alignItems: 'center',
-        marginLeft: -110
+        marginLeft: -185
     },
 });
