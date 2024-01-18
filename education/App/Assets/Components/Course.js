@@ -17,18 +17,28 @@ export default function Course({ type }) {
     }, []);
 
     const getCourse = async () => {
-        const res = (await Api.getCourse(type)).data;
-        const result = res.data.map((item) => ({
-            id: item.id,
-            name: item.attributes.name,
-            description: item.attributes.description,
-            image: item.attributes.image.data[0].attributes.url,
-            banner: item.attributes.Banner.data[0].attributes.url,
-            informationcourse: item.attributes.informationcourse,
-        }))
-        setCourse(result);
-        console.log("result", result)
-    }
+        try {
+            const res = await Api.getCourse(type);
+
+            if (res && res.data && res.data.data && Array.isArray(res.data.data)) {
+                const result = res.data.data.map((item) => ({
+                    id: item.id,
+                    name: item.attributes.name,
+                    description: item.attributes.description,
+                    image: item.attributes.image?.data[0]?.attributes.url,
+                    banner: item.attributes.Banner?.data[0]?.attributes.url,
+                    informationcourse: item.attributes.informationcourse,
+                }));
+                setCourse(result);
+                console.log("result", result);
+            } else {
+                console.error("Invalid or missing data in the API response:", res);
+            }
+        } catch (error) {
+            console.error("Error fetching courses:", error);
+        }
+    };
+
     const handleCourse = (course) => {
         console.log(course)
         navigation.navigate("Details-Course", { courseData: course });
