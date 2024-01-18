@@ -10,9 +10,9 @@ export default function ContentCourse({ course }) {
         <View style={styles.container}>
             <Text style={styles.titleText}>Key Topics</Text>
             <FlatList
-                data={course.informationcourse}
+                data={course?.informationcourse}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity onPress={() => navigation.navigate('Details-Topic')} style={styles.containerTopic}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ContentTopic', { courseContent: item })} style={styles.containerTopic}>
                         <Text style={styles.count}>0{index + 1}</Text>
                         <Text style={styles.title}>{item.title}</Text>
                         <Feather name="play" size={25} color={Colors.primary} style={{ position: 'absolute', right: 15 }} />

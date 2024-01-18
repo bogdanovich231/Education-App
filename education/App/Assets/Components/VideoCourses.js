@@ -1,6 +1,5 @@
 import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
-// import YoutubePlayer from 'react-native-youtube-iframe';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-native-snap-carousel';
 import Api from '../../Shared/Api';
 import { TouchableOpacity } from 'react-native';
@@ -10,7 +9,6 @@ const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.55);
 
 export default function VideoCourses() {
-    const [, setPlaying] = useState(false);
     const [video, setVideo] = useState([]);
     const navigation = useNavigation();
     useEffect(() => {
@@ -31,19 +29,12 @@ export default function VideoCourses() {
         setVideo(data);
     }
 
-    // const onStateChange = useCallback((state) => {
-    //     if (state === "ended") {
-    //         setPlaying(false);
-    //         Alert.alert("video has finished playing!");
-    //     }
-    // }, []);
     const handleCourse = (course) => {
         console.log(course)
         navigation.navigate("Details-Course", { courseData: course });
     }
     const _renderItem = ({ item }) => {
         return <TouchableOpacity onPress={() => handleCourse(item)} style={styles.itemContainer}>
-            {/* <YoutubePlayer width={225} height={115} videoId={item.videoid} onChangeState={onStateChange} /> */}
             <Image source={{ uri: item.image }} style={{ width: 230, height: 125, borderRadius: 10 }} />
         </TouchableOpacity>
     };

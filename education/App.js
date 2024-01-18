@@ -8,7 +8,7 @@ import Home from './App/Pages/Home';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from './App/Shared/firebase';
 import DetailsCourse from './App/Pages/DetailsCourse';
-import TopicDetails from './App/Pages/TopicDetails';
+import ContentTopic from './App/Pages/ContentTopic';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
             <Stack.Screen name="Reset" options={{ headerShown: false }} component={Reset} />
             <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
             <Stack.Screen name="Details-Course" options={{ headerShown: false }} component={DetailsCourse} />
-            <Stack.Screen name="Details-Topic" options={{ headerShown: false }} component={TopicDetails} />
+            <Stack.Screen name="ContentTopic" options={{ headerShown: false }} component={ContentTopic} />
 
           </>
         )}
