@@ -29,7 +29,6 @@ export default function VideoCourses() {
             informationcourse: item.attributes.informationcourse,
         }))
         setVideo(data);
-        console.log("data", data)
     }
 
     // const onStateChange = useCallback((state) => {
