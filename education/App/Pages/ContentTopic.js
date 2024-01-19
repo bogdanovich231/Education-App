@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { EvilIcons, Feather } from '@expo/vector-icons';
 import Colors from '../Shared/Colors';
 import ProgressBar from '../Assets/Components/ProgressBar';
-import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserData } from '../Shared/firebase';
 import Api from '../Shared/Api';
 

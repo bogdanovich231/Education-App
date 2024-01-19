@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import Colors from '../../Shared/Colors';
 import { useNavigation } from '@react-navigation/native';
 
-export default function ContentCourse({ course, userProgress }) {
+export default function ContentCourse({ course, userProgress, courseType }) {
     const navigation = useNavigation();
     useEffect(() => {
         console.log('userProgress', userProgress)
@@ -13,13 +13,29 @@ export default function ContentCourse({ course, userProgress }) {
     const checkUserProgress = (contentId) => {
         return userProgress.find(item => item.courseContentId == contentId)
     }
+    const onTopicPress = (courseContent) => {
+        if (courseType == "text") {
+            navigation.navigate('ContentTopic',
+                {
+                    courseContent: courseContent,
+                    courseId: course.id
+                })
+        } else {
+            navigation.navigate('Video',
+                {
+                    courseContent: courseContent,
+                    courseId: course.id
+                })
+        }
+
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>Key Topics</Text>
             <FlatList
                 data={course?.informationcourse}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity onPress={() => navigation.navigate('ContentTopic', { courseContent: item, courseId: course.id })} style={styles.containerTopic}>
+                    <TouchableOpacity onPress={() => onTopicPress(item)} style={styles.containerTopic}>
                         {checkUserProgress(item.id) ?
                             <Feather name="check-circle" size={30} color="#04DB40" />
                             :

@@ -31,7 +31,7 @@ export default function VideoCourses() {
 
     const handleCourse = (course) => {
         console.log(course)
-        navigation.navigate("Details-Course", { courseData: course });
+        navigation.navigate("Details-Course", { courseData: course, courseType: 'video' });
     }
     const _renderItem = ({ item }) => {
         return <TouchableOpacity onPress={() => handleCourse(item)} style={styles.itemContainer}>

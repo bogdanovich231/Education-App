@@ -40,7 +40,7 @@ export default function Course({ type }) {
 
     const handleCourse = (course) => {
         console.log(course)
-        navigation.navigate("Details-Course", { courseData: course });
+        navigation.navigate("Details-Course", { courseData: course, courseType: 'text' });
     }
     const _renderItem = ({ item }) => {
         return <TouchableOpacity style={styles.containerCourse} onPress={() => handleCourse(item)} >

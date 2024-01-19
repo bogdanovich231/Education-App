@@ -57,7 +57,7 @@ export default function DetailsCourse() {
                     <Text style={styles.descriptionText}>{course.description}</Text>
                 </View>
             </View>
-            <ContentCourse course={course} userProgress={userProgress} />
+            <ContentCourse course={course} userProgress={userProgress} courseType={route.courseType} />
         </View>
     )
 }
