@@ -4,15 +4,46 @@ import { useRoute } from '@react-navigation/native';
 import { EvilIcons } from '@expo/vector-icons';
 import ContentCourse from '../Assets/Components/ContentCourse';
 import { useNavigation } from '@react-navigation/native';
+import Api from '../Shared/Api';
+import { getUserData } from '../Shared/firebase';
 
 export default function DetailsCourse() {
     const route = useRoute().params;
     const [course, setCourse] = useState([]);
     const navigation = useNavigation();
+    const [userProgress, setUserProgress] = useState([]);
 
     useEffect(() => {
-        setCourse(route.courseData)
-    }, [])
+        setCourse(route?.courseData);
+        route?.courseData.id ? getCourseProgress() : null;
+    }, [route.courseContentId])
+
+    const getCourseProgress = async () => {
+        try {
+            const userData = await getUserData();
+            const data = {
+                data: {
+                    uid: userData.uid,
+                    courseId: route.courseId,
+                    courseContentId: parseInt(route.courseContent),
+                }
+            }
+
+            const res = await Api.getCourseProgress(data.data.uid, route?.courseData.id);
+
+            if (res.data.data) {
+                const result = res.data.data.map(item => ({
+                    id: item.uid,
+                    "courseId": item.attributes.courseId,
+                    "courseContentId": item.attributes.courseContentId,
+                }));
+                setUserProgress(result);
+                console.log("detail course: ", result)
+            }
+        } catch (error) {
+            console.error("Error fetching course progress", error);
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={{ marginTop: 50, marginLeft: 15, marginRight: 15 }}>
@@ -26,7 +57,7 @@ export default function DetailsCourse() {
                     <Text style={styles.descriptionText}>{course.description}</Text>
                 </View>
             </View>
-            <ContentCourse course={course} />
+            <ContentCourse course={course} userProgress={userProgress} />
         </View>
     )
 }

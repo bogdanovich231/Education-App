@@ -4,32 +4,58 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { EvilIcons, Feather } from '@expo/vector-icons';
 import Colors from '../Shared/Colors';
+import ProgressBar from '../Assets/Components/ProgressBar';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getUserData } from '../Shared/firebase';
+import Api from '../Shared/Api';
 
 export default function ContentTopic() {
     const route = useRoute().params;
     const [course, setCourse] = useState([]);
     const navigation = useNavigation();
     const [run, setRun] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     let courseRef;
 
     useEffect(() => {
+        setProgress(0);
         setCourse(route.courseContent.content)
     }, [])
-    const onClickNext = (index) => {
+
+    const onClickNext = async (index) => {
         setRun(false);
+        setProgress((index + 1) / course.length);
         try {
-            courseRef.scrollToIndex({ animated: true, index: index + 1 })
+            courseRef.scrollToIndex({ animated: true, index: index + 1 });
+            const userData = await getUserData();
+            const data = {
+                data: {
+                    uid: userData.uid,
+                    courseId: route.courseId,
+                    courseContentId: typeof route.courseContent === 'object' ? route.courseContent.id : parseInt(route.courseContent),
+                }
+            }
+            console.log(data.data)
+
+            const response = await Api.setCourseProgress(data);
+            console.log("LONG OUTPUT: ", response);
         } catch (e) {
             console.log(e)
-            navigation.goBack()
+            navigation.navigate({
+                name: 'Details-Course',
+                route: { courseContentId: route.courseContent.id },
+                merge: true
+            })
         }
-    }
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.btnBack} onPress={() => navigation.goBack()}>
                 <EvilIcons name="arrow-left" size={40} color="black" />
             </TouchableOpacity>
+            <ProgressBar progress={progress} />
             <FlatList
                 data={course}
                 horizontal={true}
@@ -47,8 +73,8 @@ export default function ContentTopic() {
                                 <View>
                                     <Text style={styles.input}>{item.input}</Text>
                                     <TouchableOpacity onPress={() => setRun(true)} style={styles.containerButton}>
-                                        <Text style={{ color: Colors.white, fontSize: 17 }}>Run Code</Text>
-                                        <Feather name="play" size={25} color={Colors.white} />
+                                        <Text style={{ color: Colors.white, fontSize: 20, paddingRight: 5 }}>Run Code</Text>
+                                        <Feather name="play" size={24} color={Colors.white} />
                                     </TouchableOpacity>
 
                                 </View>
@@ -102,8 +128,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: Colors.primary,
-        padding: 5,
-        width: 100,
+        padding: 10,
+        width: 115,
         borderRadius: 10,
         marginTop: 20
     },

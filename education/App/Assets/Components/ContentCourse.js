@@ -1,19 +1,30 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Feather } from '@expo/vector-icons';
 import Colors from '../../Shared/Colors';
 import { useNavigation } from '@react-navigation/native';
 
-export default function ContentCourse({ course }) {
+export default function ContentCourse({ course, userProgress }) {
     const navigation = useNavigation();
+    useEffect(() => {
+        console.log('userProgress', userProgress)
+    }, []);
+
+    const checkUserProgress = (contentId) => {
+        return userProgress.find(item => item.courseContentId == contentId)
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>Key Topics</Text>
             <FlatList
                 data={course?.informationcourse}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity onPress={() => navigation.navigate('ContentTopic', { courseContent: item })} style={styles.containerTopic}>
-                        <Text style={styles.count}>0{index + 1}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('ContentTopic', { courseContent: item, courseId: course.id })} style={styles.containerTopic}>
+                        {checkUserProgress(item.id) ?
+                            <Feather name="check-circle" size={30} color="#04DB40" />
+                            :
+                            <Text style={styles.count}>0{index + 1}</Text>
+                        }
                         <Text style={styles.title}>{item.title}</Text>
                         <Feather name="play" size={25} color={Colors.primary} style={{ position: 'absolute', right: 15 }} />
                     </TouchableOpacity>
