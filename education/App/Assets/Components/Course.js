@@ -30,7 +30,6 @@ export default function Course({ type }) {
                     informationcourse: item.attributes.informationcourse,
                 }));
                 setCourse(result);
-                console.log("result", result);
             } else {
                 console.error("Invalid or missing data in the API response:", res);
             }

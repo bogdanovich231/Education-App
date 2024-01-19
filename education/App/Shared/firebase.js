@@ -7,6 +7,7 @@ import {
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
+    onAuthStateChanged,
 } from "firebase/auth";
 import {
     getFirestore,
@@ -58,6 +59,28 @@ const logInWithEmailAndPassword = async (email, password) => {
         alert(err.message);
     }
 };
+const getUserData = async () => {
+    try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            const uid = user.uid;
+            const email = user.email;
+            console.log('User UID:', uid);
+            console.log('User email:', email);
+            // Возвращаем объект с данными пользователя
+            return { uid, email };
+        } else {
+            throw new Error('No user signed in.');
+        }
+    } catch (err) {
+        console.error(err);
+        // Возвращаем ошибку
+        throw err;
+    }
+};
+
 const registerWithEmailAndPassword = async (name, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -73,6 +96,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
         alert(err.message);
     }
 };
+
 const sendPasswordReset = async (email) => {
     try {
         await sendPasswordResetEmail(auth, email);
@@ -93,4 +117,5 @@ export {
     registerWithEmailAndPassword,
     sendPasswordReset,
     logout,
+    getUserData
 };

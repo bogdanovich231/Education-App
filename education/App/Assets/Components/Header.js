@@ -1,12 +1,28 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getUserData } from '../../Shared/firebase';
 
 export default function Header() {
+    const [userEmail, setUserEmail] = useState('');
+
+    useEffect(() => {
+        const fetchEmail = async () => {
+            try {
+                const userData = await getUserData();
+                setUserEmail(userData.email);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchEmail();
+    }, []);
+
     return (
         <View style={styles.container}>
             <View >
                 <Text style={styles.HelloText}>Hello,</Text>
-                <Text style={styles.NameText}>kulinkovich56@gmail.com</Text>
+                <Text style={styles.NameText}>{userEmail}</Text>
             </View>
             <Image style={styles.ImageUser} source={require('../Images/user.png')} />
         </View>
