@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_contents",
+  "info": {
+    "displayName": "content",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "input": {
+      "type": "richtext"
+    },
+    "output": {
+      "type": "richtext"
+    }
+  }
+}
