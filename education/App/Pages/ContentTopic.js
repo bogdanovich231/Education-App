@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
@@ -66,23 +66,26 @@ export default function ContentTopic() {
                     <View style={styles.containerChapter}>
                         <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: 20, marginBottom: 20 }}>{item.name}</Text>
                         <Text style={styles.description}>{item.description}</Text>
-                        {item.input && item.output ?
-                            <View>
-                                <Text style={{ fontSize: 17, fontWeight: 'bold' }}>Output</Text>
-                                <View>
-                                    <Text style={styles.input}>{item.input}</Text>
-                                    <TouchableOpacity onPress={() => setRun(true)} style={styles.containerButton}>
-                                        <Text style={{ color: Colors.white, fontSize: 20, paddingRight: 5 }}>Run Code</Text>
-                                        <Feather name="play" size={24} color={Colors.white} />
-                                    </TouchableOpacity>
+                        <ScrollView>
+                            {item.input && item.output ?
+                                <ScrollView>
+                                    <Text style={{ fontSize: 17, fontWeight: 'bold' }}>Input</Text>
+                                    <View>
+                                        <Text style={styles.input}>{item.input}</Text>
+                                        <TouchableOpacity onPress={() => setRun(true)} style={styles.containerButton}>
+                                            <Text style={{ color: Colors.white, fontSize: 20, paddingRight: 5 }}>Run Code</Text>
+                                            <Feather name="play" size={24} color={Colors.white} />
+                                        </TouchableOpacity>
 
+                                    </View>
+                                </ScrollView> : null}
+                            {run ?
+                                <View>
+                                    <Text style={{ fontSize: 17, fontWeight: 'bold', marginTop: 20 }}>Output</Text>
+                                    <Text style={styles.input}>{item.output}</Text>
                                 </View>
-                            </View> : null}
-                        {run ?
-                            <View>
-                                <Text style={styles.input}>{item.output}</Text>
-                            </View>
-                            : null}
+                                : null}
+                        </ScrollView>
                         <TouchableOpacity style={styles.containerBtnNext} onPress={() => onClickNext(index)}>
                             <Text style={styles.btnNext}>Next</Text>
                         </TouchableOpacity>
@@ -99,7 +102,6 @@ const styles = StyleSheet.create({
         marginLeft: 15
     },
     input: {
-        height: "50rem",
         backgroundColor: 'black',
         color: Colors.white,
         marginVertical: 10,
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     },
     container: {
         paddingTop: 50,
-        // marginLeft: 15,
-        // marginRight: 0
+        height: '100%',
+        backgroundColor: "linear-gradient(180deg, rgba(64, 208, 248, 0.08) 1.13%, rgba(64, 208, 248, 0.00) 97.19%);"
     }
 })

@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 20,
         marginLeft: 15
+
     }
 })

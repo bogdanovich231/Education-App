@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { StyleSheet, ScrollView } from 'react-native'
+import React from 'react'
 import Header from '../Assets/Components/Header'
 import SearchBar from '../Assets/Components/SearchBar'
 import Banner from '../Assets/Components/Banner'

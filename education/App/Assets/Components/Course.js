@@ -70,7 +70,6 @@ export default function Course({ type }) {
 const styles = StyleSheet.create({
     containerInfo: {
         marginLeft: 10,
-        marginBottom: 10
     },
     titleCourse: {
         marginLeft: 20,
@@ -84,10 +83,12 @@ const styles = StyleSheet.create({
     },
     lessons: {
         color: Colors.grey,
-        fontSize: 15
+        fontSize: 15,
+        paddingBottom: 10
     },
     container: {
-        marginTop: 26,
+        marginTop: 20,
+        marginBottom: 10
     },
     containerCourse: {
         backgroundColor: Colors.white,

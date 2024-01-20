@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.programtacciana.education"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +25,12 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "https://res.cloudinary.com/dwe07gwos/image/upload/v1705755136/favicon_5c6b12756d.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c357aa00-ed5f-41d8-b5e4-7a2b729a7372"
+      }
     }
   }
 }

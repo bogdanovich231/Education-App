@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     container: {
+        height: '100%',
+        backgroundColor: "linear-gradient(180deg, rgba(64, 208, 248, 0.08) 1.13%, rgba(64, 208, 248, 0.00) 97.19%);",
+
         paddingTop: 50,
         marginLeft: 15,
         marginRight: 15
