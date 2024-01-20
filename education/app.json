@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "education",
+    "slug": "education",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.programtacciana.education"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "https://res.cloudinary.com/dwe07gwos/image/upload/v1705755136/favicon_5c6b12756d.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c357aa00-ed5f-41d8-b5e4-7a2b729a7372"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_topic_topics",
+  "info": {
+    "displayName": "Topic",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.content"
+    },
+    "videoId": {
+      "type": "string"
+    }
+  }
+}
