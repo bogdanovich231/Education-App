@@ -14,7 +14,7 @@ export default function SignUp({ navigation }) {
         if (email && password) {
             try {
                 await registerWithEmailAndPassword(name, email, password)
-                alert("success")
+                alert("success");
             } catch (err) {
                 console.log('Error: ', err.message);
             }

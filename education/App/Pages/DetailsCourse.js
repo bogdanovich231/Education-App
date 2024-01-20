@@ -38,7 +38,6 @@ export default function DetailsCourse() {
                     "courseContentId": item.attributes.courseContentId,
                 }));
                 setUserProgress(result);
-                console.log("detail course: ", result)
             }
         } catch (error) {
             console.error("Error fetching course progress", error);

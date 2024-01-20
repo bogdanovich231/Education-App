@@ -35,7 +35,6 @@ export default function ContentTopic() {
                     courseContentId: typeof route.courseContent === 'object' ? route.courseContent.id : parseInt(route.courseContent),
                 }
             }
-            console.log(data.data)
 
             const response = await Api.setCourseProgress(data);
             console.log("LONG OUTPUT: ", response);

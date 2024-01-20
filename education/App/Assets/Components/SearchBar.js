@@ -1,5 +1,5 @@
 import { EvilIcons } from '@expo/vector-icons';
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, TextInput, StyleSheet } from 'react-native'
 import React from 'react'
 import Colors from '../../Shared/Colors';
 
