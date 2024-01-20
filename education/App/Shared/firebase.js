@@ -7,7 +7,7 @@ import {
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
-    onAuthStateChanged,
+
 } from "firebase/auth";
 import {
     getFirestore,
@@ -19,13 +19,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_NATIVE_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_NATIVE_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.REACT_NATIVE_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_NATIVE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_NATIVE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_NATIVE_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_NATIVE_FIREBASE_MEASUREMENT_ID,
+    apiKey: 'AIzaSyCdsPSj9QDNmk3nBf22syd8rWTyhSt7CU0',
+    authDomain: 'movie-dc61b.firebaseapp.com',
+    projectId: 'movie-dc61b',
+    storageBucket: 'movie-dc61b.appspot.com',
+    messagingSenderId: '546465847889',
+    appId: '1:546465847889:web:f702f4d02fee9b30c9f670',
+    measurementId: 'G-8T2RVG7TDN',
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
